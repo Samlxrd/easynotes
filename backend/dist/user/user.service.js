@@ -17,7 +17,7 @@ let UserService = class UserService {
         this.execute = execute;
     }
     create(createUserDto) {
-        let query = `INSERT INTO user (username, password) VALUES (${createUserDto.username}, ${createUserDto.password});`;
+        let query = `INSERT INTO users (username, password) VALUES ('${createUserDto.username}', '${createUserDto.password}');`;
         return this.execute.executeQuery(query);
     }
     findAll() {
@@ -25,25 +25,25 @@ let UserService = class UserService {
         return this.execute.executeQuery(query);
     }
     findOne(id) {
-        let query = `SELECT * FROM users WHERE id = ${id}`;
+        let query = `SELECT * FROM users WHERE id = ${id};`;
         return this.execute.executeQuery(query);
     }
     updateAll(id, updateUserDto) {
         if (updateUserDto.username && updateUserDto.password) {
-            let query = `UPDATE users SET username = ${updateUserDto.username}, password = ${updateUserDto.password}`;
+            let query = `UPDATE users SET username = '${updateUserDto.username}', 'password = ${updateUserDto.password};'`;
             return this.execute.executeQuery(query);
         }
         else if (updateUserDto.username) {
-            let query = `UPDATE users SET username = ${updateUserDto.username}`;
+            let query = `UPDATE users SET username = '${updateUserDto.username}';`;
             return this.execute.executeQuery(query);
         }
         else if (updateUserDto.password) {
-            let query = `UPDATE users SET password = ${updateUserDto.password}`;
+            let query = `UPDATE users SET password = '${updateUserDto.password}';`;
             return this.execute.executeQuery(query);
         }
     }
     remove(id) {
-        let query = `DELETE FROM users WHERE id = ${id}`;
+        let query = `DELETE FROM users WHERE id = ${id};`;
         return this.execute.executeQuery(query);
     }
 };
