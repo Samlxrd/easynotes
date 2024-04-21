@@ -13,12 +13,13 @@ const app_service_1 = require("./app.service");
 const dbconnection_service_1 = require("./dbconnection/dbconnection.service");
 const note_module_1 = require("./note/note.module");
 const user_module_1 = require("./user/user.module");
+const group_module_1 = require("./group/group.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [note_module_1.NoteModule, user_module_1.UserModule],
+        imports: [note_module_1.NoteModule, user_module_1.UserModule, group_module_1.GroupModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService, dbconnection_service_1.DbconnectionService],
     })

@@ -9,47 +9,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserService = void 0;
+exports.GroupService = void 0;
 const common_1 = require("@nestjs/common");
 const dbconnection_service_1 = require("../dbconnection/dbconnection.service");
-let UserService = class UserService {
+let GroupService = class GroupService {
     constructor(execute) {
         this.execute = execute;
     }
-    create(createUserDto) {
-        let query = `INSERT INTO user (username, password) VALUES (${createUserDto.username}, ${createUserDto.password});`;
+    create(createGroupDto) {
+        let query = `INSERT INTO group (title, fixed) VALUES (${createGroupDto.title}, 0);`;
         return this.execute.executeQuery(query);
     }
     findAll() {
-        let query = "SELECT * FROM users;";
+        let query = "SELECT * FROM group;";
         return this.execute.executeQuery(query);
     }
     findOne(id) {
-        let query = `SELECT * FROM users WHERE id = ${id}`;
+        let query = `SELECT * FROM group WHERE id = ${id};`;
         return this.execute.executeQuery(query);
     }
-    updateAll(id, updateUserDto) {
-        if (updateUserDto.username && updateUserDto.password) {
-            let query = `UPDATE users SET username = ${updateUserDto.username}, password = ${updateUserDto.password} WHERE id = ${id}`;
+    update(id, updateGroupDto) {
+        if (updateGroupDto.title) {
+            let query = `UPDATE group SET title = ${updateGroupDto.title} WHERE id = ${id};`;
             return this.execute.executeQuery(query);
         }
-        else if (updateUserDto.username) {
-            let query = `UPDATE users SET username = ${updateUserDto.username} WHERE id = ${id}`;
-            return this.execute.executeQuery(query);
-        }
-        else if (updateUserDto.password) {
-            let query = `UPDATE users SET password = ${updateUserDto.password} WHERE id = ${id}`;
+        if (updateGroupDto.fixed) {
+            let query = `UPDATE group SET fixed = ${updateGroupDto.fixed} WHERE id = ${id};`;
             return this.execute.executeQuery(query);
         }
     }
     remove(id) {
-        let query = `DELETE FROM users WHERE id = ${id}`;
+        let query = `DELETE FROM group WHERE id = ${id};`;
         return this.execute.executeQuery(query);
     }
 };
-exports.UserService = UserService;
-exports.UserService = UserService = __decorate([
+exports.GroupService = GroupService;
+exports.GroupService = GroupService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [dbconnection_service_1.DbconnectionService])
-], UserService);
-//# sourceMappingURL=user.service.js.map
+], GroupService);
+//# sourceMappingURL=group.service.js.map
