@@ -23,6 +23,7 @@ export class DbconnectionService {
     }
 
     async executeQuery(query: string): Promise<any> {
+        console.log('query recebida: ', query)
         return new Promise((resolve, reject) => {
             this.connection.query(query, (error, results) => {
                 if (error) {

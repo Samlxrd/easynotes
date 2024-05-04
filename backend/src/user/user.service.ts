@@ -2,23 +2,32 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { DbconnectionService } from 'src/dbconnection/dbconnection.service';
+import { User } from './entities/user.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
   constructor(private readonly execute: DbconnectionService) { }
 
-  create(createUserDto: CreateUserDto) {
-    let query = `INSERT INTO users (username, password) VALUES ('${createUserDto.username}', '${createUserDto.password}');`
+  async create(createUserDto: CreateUserDto) {
+    const hashedPassword =  await bcrypt.hash(createUserDto.password, 10);
+
+    let query = `INSERT INTO users (username, password, email) VALUES ('${createUserDto.username}', '${hashedPassword}', '${createUserDto.email}');`
     return this.execute.executeQuery(query);
   }
 
-  findAll() {
+  getUsers() {
     let query = "SELECT * FROM users;";
     return this.execute.executeQuery(query);
   }
 
-  findOne(id: number) {
+  getUserById(id: number) {
     let query = `SELECT * FROM users WHERE id = ${id};`
+    return this.execute.executeQuery(query);
+  }
+
+  async getUserByUsername(username: string): Promise<User>{
+    let query = `SELECT * FROM users WHERE username = '${username}';`
     return this.execute.executeQuery(query);
   }
 
