@@ -8,7 +8,7 @@ export class UserService {
   constructor(private readonly execute: DbconnectionService) { }
 
   create(createUserDto: CreateUserDto) {
-    let query = `INSERT INTO user (username, password) VALUES (${createUserDto.username}, ${createUserDto.password});`
+    let query = `INSERT INTO user (username, password, email) VALUES (${createUserDto.username}, ${createUserDto.password}, ${createUserDto.email});`
     return this.execute.executeQuery(query);
   }
 
@@ -36,6 +36,9 @@ export class UserService {
       let query = `UPDATE users SET password = ${updateUserDto.password} WHERE id = ${id}`;
       return this.execute.executeQuery(query);
 
+    } else if (updateUserDto.email) {
+      let query = `UPDATE users SET email = ${updateUserDto.email} WHERE id = ${id}`;
+      return this.execute.executeQuery(query);
     }
   }
 
