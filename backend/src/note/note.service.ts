@@ -21,10 +21,12 @@ export class NoteService {
     return this.dbConnectionService.executeQuery(query);
   }
 
-  update(id: number, updateNoteDto: UpdateNoteDto) {
+  async update(id: number, updateNoteDto: UpdateNoteDto) {
+    console.log(id, updateNoteDto)
+
     if (updateNoteDto.title) {
       let query = `UPDATE notes SET title = '${updateNoteDto.title}' WHERE id = ${id};`;
-      this.dbConnectionService.executeQuery(query);
+      await this.dbConnectionService.executeQuery(query);
     }
     
     if (updateNoteDto.body) {

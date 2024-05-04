@@ -26,6 +26,7 @@ export class NoteController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateNoteDto: UpdateNoteDto) {
+    console.log(id, updateNoteDto)
     return this.noteService.update(+id, updateNoteDto);
   }
 

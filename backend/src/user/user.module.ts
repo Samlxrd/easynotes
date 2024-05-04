@@ -6,5 +6,6 @@ import { DbconnectionService } from 'src/dbconnection/dbconnection.service';
 @Module({
   controllers: [UserController],
   providers: [UserService, DbconnectionService],
+  exports: [UserService, DbconnectionService]
 })
 export class UserModule {}
