@@ -5,9 +5,10 @@ import { DbconnectionService } from './dbconnection/dbconnection.service';
 import { NoteModule } from './note/note.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { GroupModule } from './group/group.module';
 
 @Module({
-  imports: [NoteModule, UserModule, AuthModule],
+  imports: [NoteModule, UserModule, GroupModule, AuthModule],
   controllers: [AppController],
   providers: [AppService, DbconnectionService],
 })
