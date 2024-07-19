@@ -4,4 +4,5 @@ import { CreateGroupDto } from './create-group.dto';
 export class UpdateGroupDto extends PartialType(CreateGroupDto) {
     title?: string;
     fixed?: number;
+    user_id: number;
 }

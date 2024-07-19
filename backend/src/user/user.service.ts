@@ -34,17 +34,17 @@ export class UserService {
   updateAll(id: number, updateUserDto: UpdateUserDto) {
 
     if (updateUserDto.username) {
-      let query = `UPDATE users SET username = ${updateUserDto.username} WHERE id = ${id}`;
+      let query = `UPDATE users SET username = '${updateUserDto.username}' WHERE id = ${id}`;
       return this.execute.executeQuery(query);
     }
 
     if (updateUserDto.password) {
-      let query = `UPDATE users SET password = ${updateUserDto.password} WHERE id = ${id}`;
+      let query = `UPDATE users SET password = '${updateUserDto.password}' WHERE id = ${id}`;
       return this.execute.executeQuery(query);
     }
     
     if (updateUserDto.email) { 
-      let query = `UPDATE users SET email = ${updateUserDto.email} WHERE id = ${id}`;
+      let query = `UPDATE users SET email = '${updateUserDto.email}' WHERE id = ${id}`;
       return this.execute.executeQuery(query);
     }
   }
