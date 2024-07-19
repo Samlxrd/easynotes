@@ -10,8 +10,8 @@ function Header() {
           <li><a href="#">Favoritos</a></li>
         </div>
         <div class="data-user">
-          <li><span>username</span></li>
-          
+          <li><h3>Username</h3></li>
+          <li><img src="https://i.pinimg.com/originals/70/c4/f6/70c4f6ccba510995bcfcd87fd0704191.jpg" alt=""/></li>
         </div>
       </ul>
     </header>
