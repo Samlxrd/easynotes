@@ -7,17 +7,17 @@ import { DbconnectionService } from 'src/dbconnection/dbconnection.service';
 export class GroupService {
   constructor(private readonly execute: DbconnectionService) { }
   create(createGroupDto: CreateGroupDto) {
-    let query = `INSERT INTO grupo (title, fixed) VALUES ('${createGroupDto.title}', ${createGroupDto.fixed})`;
+    let query = `INSERT INTO grupo (title, fixed, user_id) VALUES ('${createGroupDto.title}', ${createGroupDto.fixed || 0}, ${createGroupDto.user_id});`;
     return this.execute.executeQuery(query);
   }
 
-  findAll() { 
-    let query = "SELECT * FROM grupo;";
+  getGroupsByUserId(id: number) { 
+    let query = `SELECT * FROM grupo WHERE user_id = ${id};`;
     return this.execute.executeQuery(query);
   }
 
-  findOne(id: number) { 
-    let query = `SELECT * FROM grupo WHERE id = ${id};`;
+  getGroupByUserId(user_id: number, id: number) { 
+    let query = `SELECT * FROM grupo WHERE user_id = ${user_id} AND id = ${id};`;
     return this.execute.executeQuery(query);
   }
 

@@ -12,14 +12,14 @@ export class GroupController {
     return this.groupService.create(createGroupDto);
   }
 
-  @Get()
-  findAll() {
-    return this.groupService.findAll();
+  @Get(':id')
+  getGroupsByUserId(@Param('id') id: string) {
+    return this.groupService.getGroupsByUserId(+id);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.groupService.findOne(+id);
+  @Get(':user_id/:id')
+  getGroupByUserId(@Param('user_id') userId: string, @Param('id') id: string) {
+    return this.groupService.getGroupByUserId(+userId, +id);
   }
 
   @Patch(':id')
