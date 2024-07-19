@@ -3,7 +3,17 @@ import './header.css';
 function Header() {
   return (
     <header>
-      <h1>Header</h1>
+      <ul class="nav-bar">
+        <div class="nav">
+          <li><a href="#">Notas</a></li>
+          <li><a href="#">Grupos</a></li>
+          <li><a href="#">Favoritos</a></li>
+        </div>
+        <div class="data-user">
+          <li><span>username</span></li>
+          
+        </div>
+      </ul>
     </header>
   );
 }
