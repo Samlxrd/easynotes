@@ -11,6 +11,7 @@ h3 {
     width: 25vw;
     margin: 0 auto;
     color: var(--white);
+    z-index: 1;
 }
 
 .form-group {

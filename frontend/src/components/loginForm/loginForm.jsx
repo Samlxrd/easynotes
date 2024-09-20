@@ -6,12 +6,12 @@ function LoginForm() {
             <h3>Entrar</h3>
             <form action="">
                 <div className="form-group">
-                    <label for="username">Usuário</label>
+                    <label htmlFor="username">Usuário</label>
                     <input type="text" id="username" name="username" />
                 </div>
 
                 <div className="form-group">
-                    <label for="password">Senha</label>
+                    <label htmlFor="password">Senha</label>
                     <input type="password" id="password" name="password" />
                 </div>
 
