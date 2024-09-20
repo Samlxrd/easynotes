@@ -1,21 +1,16 @@
-// import { useEffect, useState } from 'react';
 import LoginForm from '../components/loginForm/loginForm';
-// import { getUserNotes } from '../services/api';
+import CreateAccountForm from '../components/create_account/form_create';
 import './Home.css';
+import { useState } from 'react';
 
 export default function Home() {
-    // const [notas, setNotas] = useState({});
-    // useEffect(() => {
-    //     getUserNotes(1).then(data => setNotas(data));
-    // }, [])
+    const [showLogin, setShowLogin] = useState(true);
 
     return <>
-            <section className="screen">
-                <h1>EasyNotes</h1>
-                <LoginForm />
-                {/* {notas.length > 0 && <ul>
-                    {notas.map(nota => ( <li key={nota.id}>{nota.title} | {nota.body} </li>))}
-                    </ul>} */}
-            </section>
-        </>
+        <section className="screen">
+            <h1>EasyNotes</h1>
+            <button onClick={() => setShowLogin(!showLogin)}>{showLogin ? 'Criar Conta' : 'Fazer Login'}</button>
+            {showLogin ? <LoginForm /> : <CreateAccountForm />}
+        </section>
+    </>
 }
