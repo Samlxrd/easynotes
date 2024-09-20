@@ -28,7 +28,8 @@ export class UserService {
 
   async getUserByUsername(username: string): Promise<User>{
     let query = `SELECT * FROM users WHERE username = '${username}';`
-    return this.execute.executeQuery(query);
+    const result = await this.execute.executeQuery(query);
+    return result.length > 0 ? result[0] : undefined;
   }
 
   updateAll(id: number, updateUserDto: UpdateUserDto) {
