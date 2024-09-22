@@ -1,0 +1,26 @@
+h3 {
+    text-align: center;
+    margin: 4vh;
+    font-size: 24px;
+    font-weight: normal;
+}
+
+.form {
+    background-color: var(--dark-grey);
+    height: 50vh;
+    width: 25vw;
+    margin: 0 auto;
+    color: var(--white);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin: 2vh;
+}
+
+.form-group input {
+    padding: 1vh;
+    border: none;
+    width: 18vw;
+}

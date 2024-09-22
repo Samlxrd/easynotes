@@ -1,6 +1,24 @@
 import axios from 'axios';
 
+
 export const baseURL = 'http://localhost:5000';
+
+const axiosInstance = axios.create({
+    headers: {
+        'Content-Type': 'multipart/form-data'
+    }
+});
+
+// Configurando o interceptor para adicionar o token
+axiosInstance.interceptors.request.use(config => {
+    const token = localStorage.getItem('token'); // Obtendo o token do local storage
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`; // Adicionando o token ao cabeçalho
+    }
+    return config;
+}, error => {
+    return Promise.reject(error);
+});
 
 export async function getUserNotes(id) {
     try {
@@ -26,5 +44,14 @@ export async function CreateUser(username, password, email) {
         return response.data;
     } catch (error) {
         throw new Error('Falha ao fazer login.', error.message);
+    }
+}
+
+export async function CreateNote(title, body) {
+    try {
+        const response = await axiosInstance.post(`${baseURL}/note`, { title, body });
+        return response.data;
+    } catch (error) {
+        throw new Error('Falha ao criar a nota.', error.message);
     }
 }

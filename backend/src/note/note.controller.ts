@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, UseGuards, Request } from '@nestjs/common';
 import { NoteService } from './note.service';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('note')
 export class NoteController {
@@ -9,28 +10,37 @@ export class NoteController {
 
   @Post()
   @HttpCode(201)
-  create(@Body() createNoteDto: CreateNoteDto) {
+  /* @UseGuards(AuthGuard)  */
+  create(@Body() createNoteDto: CreateNoteDto, @Request() req ) {
+    const id = req.user.id;
+    createNoteDto.user_id = id;
     return this.noteService.create(createNoteDto);
   }
 
-  @Get(':id')
+  @Get()
   @HttpCode(200)
-  getNotesByUserId(@Param('id') id: string) {
+  @UseGuards(AuthGuard)
+  getNotesByUserId(@Request() req) {
+    const id = req.user.id;
     return this.noteService.getNotesByUserId(+id);
   }
 
-  @Get(':user_id/:id')
-  getNoteByUserId(@Param('user_id') userId: string, @Param('id') id: string) {
+  @Get(':id')
+  @UseGuards(AuthGuard)
+  getNoteByUserId(@Request() req, @Param('id') id: string) {
+    const userId = req.user.id;
     return this.noteService.getNoteByUserId(+userId, +id);
   }
 
   @Patch(':id')
+  @UseGuards(AuthGuard)
   update(@Param('id') id: string, @Body() updateNoteDto: UpdateNoteDto) {
     console.log(id, updateNoteDto)
     return this.noteService.update(+id, updateNoteDto);
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard)
   remove(@Param('id') id: string) {
     return this.noteService.remove(+id);
   }

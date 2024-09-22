@@ -6,9 +6,10 @@ import { DbconnectionService } from 'src/dbconnection/dbconnection.service';
 @Injectable()
 export class NoteService {
   constructor(private readonly dbConnectionService: DbconnectionService) {}
-  create(createNoteDto: CreateNoteDto) {
+  async create(createNoteDto: CreateNoteDto) {
+    console.log(createNoteDto);
     let query = `INSERT INTO notes (title, body, group_id, user_id) VALUES ('${createNoteDto.title}', '${createNoteDto.body}', ${createNoteDto.group_id || null}, ${createNoteDto.user_id});`;
-    return this.dbConnectionService.executeQuery(query);
+    return await this.dbConnectionService.executeQuery(query);
   }
 
   getNotesByUserId(id: number) {
@@ -31,12 +32,12 @@ export class NoteService {
     
     if (updateNoteDto.body) {
       let query = `UPDATE notes SET body = '${updateNoteDto.body}' WHERE id = ${id};`;
-      this.dbConnectionService.executeQuery(query);
+      await this.dbConnectionService.executeQuery(query);
     }
     
     if (updateNoteDto.group_id) {
       let query = `UPDATE notes SET group_id = ${updateNoteDto.group_id} WHERE id = ${id};`;
-      this.dbConnectionService.executeQuery(query);
+      await this.dbConnectionService.executeQuery(query);
     }
 
     return ;
