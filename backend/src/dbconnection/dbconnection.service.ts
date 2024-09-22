@@ -3,10 +3,10 @@ import * as mysql from 'mysql';
 
 @Injectable()
 export class DbconnectionService {
-    private static connection: mysql.Connection; // Alterado para estático
+    private static connection: mysql.Connection;
 
     constructor() {
-        if (!DbconnectionService.connection) { // Verifica se a conexão já existe
+        if (!DbconnectionService.connection) {
             DbconnectionService.connection = mysql.createConnection({
                 host: 'localhost',
                 user: 'root',
@@ -27,7 +27,7 @@ export class DbconnectionService {
     async executeQuery(query: string): Promise<any> {
         console.log('query recebida: ', query)
         return new Promise((resolve, reject) => {
-            DbconnectionService.connection.query(query, (error, results) => { // Usando a conexão estática
+            DbconnectionService.connection.query(query, (error, results) => {
                 if (error) {
                     reject(error);
                 } else {

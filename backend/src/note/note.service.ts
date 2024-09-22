@@ -12,7 +12,7 @@ export class NoteService {
   }
 
   getNotesByUserId(id: number) {
-    let query = `SELECT * FROM notes WHERE user_id = ${id};`;
+    let query = `SELECT * FROM notes WHERE user_id = ${id} ORDER BY updated_at desc;`;
     return this.dbConnectionService.executeQuery(query);
   }
 
@@ -20,7 +20,7 @@ export class NoteService {
     let query = `SELECT * FROM notes WHERE user_id = ${user_id} AND id = ${id};`;
     return this.dbConnectionService.executeQuery(query);
   }
-
+  
   async update(id: number, updateNoteDto: UpdateNoteDto) {
     console.log(id, updateNoteDto)
 
