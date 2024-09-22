@@ -13,10 +13,7 @@ export class NoteController {
   @UseGuards(AuthGuard)
   create(@Body() createNoteDto: CreateNoteDto, @Request() req ) {
     const id = req.user.id;
-    createNoteDto.title = "KKK";
-    createNoteDto.body = "foi";
     createNoteDto.user_id = id;
-    console.log("Controler_note: " + createNoteDto);
     return this.noteService.create(createNoteDto);
   }
 

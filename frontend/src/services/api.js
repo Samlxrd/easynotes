@@ -5,15 +5,15 @@ export const baseURL = 'http://localhost:5000';
 
 const axiosInstance = axios.create({
     headers: {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'application/json'
     }
 });
 
 // Configurando o interceptor para adicionar o token
 axiosInstance.interceptors.request.use(config => {
-    const token = localStorage.getItem('token'); // Obtendo o token do local storage
+    const token = localStorage.getItem('token'); 
     if (token) {
-        config.headers.Authorization = `Bearer ${token}`; // Adicionando o token ao cabeçalho
+        config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
 }, error => {
@@ -50,9 +50,7 @@ export async function CreateUser(username, password, email) {
 
 export async function CreateNote(title, body) {
     try {
-        console.log(`api.js: ${title} ${body}`);
-        console.log('1')
-        const response = await axiosInstance.post(`${baseURL}/note`, { title, body });
+        const response = await axiosInstance.post(`${baseURL}/note`, {title, body});
         console.log("Resposta da API: ", response);
         return response.data;
     } catch (error) {
