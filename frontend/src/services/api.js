@@ -19,3 +19,12 @@ export async function login(username, password) {
         throw new Error('Falha ao fazer login.', error.message);
     }
 }
+
+export async function CreateUser(username, password, email) {
+    try {
+        const response = await axios.post(`${baseURL}/user`, { username, password, email });
+        return response.data;
+    } catch (error) {
+        throw new Error('Falha ao fazer login.', error.message);
+    }
+}

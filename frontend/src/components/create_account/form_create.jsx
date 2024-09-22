@@ -1,10 +1,28 @@
+import { CreateUser } from '../../services/api';
 import './form_create.css';
+
+function CreateLogin(event) {
+    event.preventDefault();
+    const username = event.currentTarget.name.value; // Alterado para currentTarget
+    const password = event.currentTarget.password.value; // Alterado para currentTarget
+    const email = event.currentTarget.email.value; // Alterado para currentTarget
+    
+    const response = CreateUser(username, password, email);
+    response.then(data => {
+        alert("Conta criada com sucesso!");
+        window.location.href = '/';
+    }).catch(error => {
+        alert(error);
+        console.error(error);
+    });
+}
+
 
 function CreateAccountForm() {
     return (
         <div className="form">
             <h3>Criar Conta</h3>
-            <form action="">
+            <form onSubmit={CreateLogin} action="">
                 <div className="form-group">
                     <label for="name">Nome</label>
                     <input type="text" id="name" name="name" required />
