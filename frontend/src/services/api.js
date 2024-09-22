@@ -17,6 +17,7 @@ axiosInstance.interceptors.request.use(config => {
     }
     return config;
 }, error => {
+    console.log(error);
     return Promise.reject(error);
 });
 
@@ -49,7 +50,10 @@ export async function CreateUser(username, password, email) {
 
 export async function CreateNote(title, body) {
     try {
+        console.log(`api.js: ${title} ${body}`);
+        console.log('1')
         const response = await axiosInstance.post(`${baseURL}/note`, { title, body });
+        console.log("Resposta da API: ", response);
         return response.data;
     } catch (error) {
         throw new Error('Falha ao criar a nota.', error.message);

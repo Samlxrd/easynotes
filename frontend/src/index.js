@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Hello from './pages/Hello';
+import CreateNote from './pages/create_note';
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
       <Routes>
         <Route path="/" index element={<Home/>} />
         <Route path="/hello" element={<Hello/>} />
+        <Route path="/create/note" element={<CreateNote/>} />
       </Routes>
     </BrowserRouter>
   );

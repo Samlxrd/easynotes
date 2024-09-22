@@ -3,13 +3,17 @@ import './form_create_note.css';
 
 function CreateNoteFormRequest(event) {
     event.preventDefault();
-    const title = event.currentTarget.title.value; // Alterado para currentTarget
-    const body = event.currentTarget.body.value; // Alterado para currentTarget
+    let title = event.currentTarget.title.value; // Alterado para currentTarget
+    let body = event.currentTarget.body.value; // Alterado para currentTarget
     
+    title = "ola";
+    body = "kkkkkkk";
+    
+    console.log(`form.js: Título: ${title}, Corpo: ${body}`);
     const response = CreateNote(title, body);
     response.then(data => {
         alert("Nota criada com sucesso!");
-        window.location.href = '/';
+        window.location.href = '/hello';
     }).catch(error => {
         alert(error);
         console.error(error);

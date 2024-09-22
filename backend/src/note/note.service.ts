@@ -7,7 +7,7 @@ import { DbconnectionService } from 'src/dbconnection/dbconnection.service';
 export class NoteService {
   constructor(private readonly dbConnectionService: DbconnectionService) {}
   async create(createNoteDto: CreateNoteDto) {
-    console.log(createNoteDto);
+    console.log(createNoteDto + "aaa");
     let query = `INSERT INTO notes (title, body, group_id, user_id) VALUES ('${createNoteDto.title}', '${createNoteDto.body}', ${createNoteDto.group_id || null}, ${createNoteDto.user_id});`;
     return await this.dbConnectionService.executeQuery(query);
   }
